@@ -1,0 +1,234 @@
+\chapter{Linguagens de Programação na JVM}
+
+\vspace{-1.9cm}
+
+  \section{Clojure}
+
+  Clojure é uma linguagem de programação criada por Rich Hickey e classificada como um dialeto \ac{Lisp} que funciona na \ac{JVM}. Clojure utiliza o paradigma de programação funcional e ela é construída em S-expressions que são uma notação para listas de dados aninhadas. \ac{Lisp} é uma das mais velhas linguagens de programação, criada por John McCarthy in 1958. Além de Clojure, muitos outros dialetos do \ac{Lisp} foram criados, como Scheme e Common Lisp.
+
+  Clojure é uma linguagem dinâmica assim como o \ac{Lisp}. Isto significa que muitas coisas são determinadas em tempo de execução de um programa e não quando o código-fonte do programa vai ser compilado. Isso permite que programas sejam escritos de forma que não seria possível em linguagens estáticas.\cite{clojureInAction}.
+
+  Devido a sua interoperabilidade com o Java, Clojure pode utilizar qualquer biblioteca Java, assim como bibliotecas escritas em Clojure podem ser usadas no Java. Uma aplicação Clojure pode ser compilada e ser executada como uma aplicação Java comum.
+
+  Clojure é classificada como uma linguagem de programação funcional e um exemplo disso está na forma de tratar todas as estruturas de dados como imutáveis, além disso Clojure incentiva o uso de funções de ordem superior. Suas principais estruturas de dados utilizam uma técnica chamada laziness (preguiça), que significa que sua execução acontece somente quando necessário. Um exemplo de uso para laziness é a capacidade de definir e utilizar sequências infinitas.\cite{clojureInAction}.
+
+    \subsection{S-expressions}
+
+    S-expression ou expressão simbólica são estruturas de dados baseadas em listas que representam dados semi-estruturados, seu uso se tornou mais comum devido ao seu uso na família de linguagens de programação baseadas no \ac{Lisp}. Uma S-expression pode ser uma lista quem contém outras S-expressions. Eles normalmente são representados com texto entre parênteses, sequências de caracteres separadas por espaços brancos, como por exemplo em $(= 3 (1 + 2))$, que representa a expressão booleana normalmente escrita em Java como $1 + 2 == 3$.
+
+    \subsection{Funções de Ordem Superior}
+
+    Funções escritas em Clojure são funções de primeira classe e isso significa que funções podem ser passadas em forma de parâmetro para outras funções, podem ser criadas dinamicamente e podem ser usadas como retorno de outras funções. Em Clojure funções são como estruturas de dados, números ou um conjunto de caracteres (strings).
+
+    Dada as funções $soma$ e $calcular$ a seguir:
+
+    \begin{lstlisting}[language=Clojure, mathescape=false]
+      (defn soma [a b] (+ a b))
+      (defn calcular [fn a b]  (format "Resultado: \%d" (fn a b)))
+    \end{lstlisting}
+
+    Exemplo de função de ordem superior passando a função $soma$ como argumento para a função $calcular$:
+
+    \begin{lstlisting}[mathescape=false]
+      (calcular soma 10 15)
+      "Resultado: 25"
+    \end{lstlisting}
+
+    \subsection{Transparência Referencial}
+
+    Funções referencialmente transparentes sempre retorna o mesmo resultado quando chamadas com o mesmo argumento. A fim de alcançar este objectivo, elas só dependem de seus próprios argumentos e de valores imutáveis ​​para determinar o seu valor de retorno.
+
+    Ao utilizar uma função referencialmente transparente, nunca é necessário considerar quais as possíveis condições externas podem afetar o valor de retorno da função. Isto é especialmente importante se a função é usada em vários lugares ou se está aninhada em uma cadeia de chamadas de função. Por exemplo, dada a função a seguir, não importa quantas vezes ela seja invocada com os mesmos parâmetros, a função sempre vai retornar o mesmo valor.
+
+    \begin{lstlisting}[language=Clojure, mathescape=false]
+      (defn somar [numeros] (reduce + numeros))
+
+      (somar [1 2 3])
+      6
+
+      (somar [1 2 3])
+      6
+
+      (somar [1 2 3])
+      6
+    \end{lstlisting}
+
+    \subsection{Recursividade}
+
+    Segundo \citeonline{progClojure}, Clojure realiza um ótimo trabalho em unir o poder da programação funcional com a realidade da \ac{JVM}, e um exemplo disso é o uso de \ac{TCO} explícitos através de $loop/recur$. Uma das características em Clojure que um programador acostumado com \ac{OOP} pode sentir falta é a ausência de laços para realizar tarefas repetitivas como percorrer todos os elementos de uma lista.
+
+    A seguir um exemplo de como criar uma função para calcular o valor de $x$ elevado à $y$ para demonstrar o uso de recursividade em Clojure.
+
+    \begin{lstlisting}[language=Clojure, mathescape=false]
+      (defn exponencial
+        ([x y]
+          (if (= y 0)
+            1
+            (* x (exponencial x (- y 1))))))
+
+      (exponencial 2 3)
+      8
+    \end{lstlisting}
+
+  \section{Scala}
+
+  Scala é uma abreviação para Scalable Language e é uma linguagem de programação de tipagem estática classificada como uma linguagem híbrida ou multi-paradigma que incorpora algumas recursos da programação orientada a objetos e outros recursos da programação funcional.
+
+  O desenvolvimento da linguagem Scala foi iniciada por Martin Odersky em 2001 e teve a primeira versão liberada para o uso em 2003. Martin é professor na Escola de Ciências da Computação e Comunicação na \ac{EPFL}. Ele passou seus anos de pós-graduação trabalhando no grupo liderado por Niklaus Wirth. Martin trabalhou na linguagem Pizza, uma linguagem funcional precoce na JVM. Mais tarde, ele trabalhou no GJ, um protótipo do que mais tarde se tornou genéricos em Java, com Philip Wadler. Martin foi contratado pela Sun Microsystems para produzir a implementação de referência do $javac$, o compilador Java que é distribuído com o \ac{JDK}.\cite{sevenLangs}.
+
+  Scala é executada na \ac{JVM} e interopera de forma integrada com todas as bibliotecas Java, assim como programas escritos em Scala também podem ser utilizados por programas ou bibliotecas Java.
+
+  Scala estende o sistema de tipos do Java com objetos genéricos mais flexíveis. A inferência de tipo utilizada pela linguagem ajuda de forma automática na assinatura de tipos, para que o programador não tenha que fornecer informações sobre tipagem manualmente.
+
+  Segundo \citeonline{progScala}, as principais características dessa linguagem são:
+
+  \begin{compactitem}
+    \item Possui suporte a modelo de concorrência baseado em eventos;
+    \item Possui suporte ao estilo de programação imperativa e funcional;
+    \item É puramente orientada à objetos;
+    \item Possui ótima interoperabilidade com Java;
+    \item Impõe tipagem estática;
+    \item É concisa e expressiva;
+    \item É altamente escalável, e isso significa escrever menos código para criar programar com grande desempenho;
+  \end{compactitem}
+
+    \subsection{Funções de ordem superior}
+
+    Em Scala é possível passar funções anônimas para uma outra função. Funções que podem receber outras funções como parâmetros são chamadas de funções de ordem superior (high-order function). Na matemática, dois exemplos de funções de ordem superior são as derivadas e integral.
+
+    Dada as funções $soma$ e $calcular$ a seguir:
+
+    \begin{lstlisting}[language=Scala, mathescape=false]
+      def soma(a: Int, b: Int) = a + b
+      def calcular(funcao: (Int, Int) => Int, a: Int, b: Int) = "Resultado: " + funcao(a, b)
+    \end{lstlisting}
+
+    Exemplo de função de ordem superior passando a função $soma$ como argumento para a função $calcular$:
+
+    \begin{lstlisting}[mathescape=false]
+      calcular(soma, 10, 20)
+      "Resultado: 30"
+    \end{lstlisting}
+
+    \subsection{Imutabilidade}
+
+    Imutabilidade é outra consequência da matemática. Na expressão matemática $y = sin (x)$, uma vez que se saiba o valor de $x$, o resultado de $y$ será sempre o mesmo. Como outro exemplo, se for feito a soma dos números inteiros $3$ e $4$, o valor resultante $7$ desse cálculo é novo número e não um número modificado.\cite{progScala2}.
+
+    Em Scala, quando o valor de uma variável é definido, este não pode mais ser alterado. Para demonstrar, este é um exemplo de como criar uma variável em Scala:
+
+    \begin{lstlisting}[language=Scala, mathescape=false]
+      class Teste {
+        val resultado = 3 + 4
+        resultado = resultado + 1
+      }
+    \end{lstlisting}
+
+    Quando essa classe é compilada, o compilador Scala informa o seguinte erro de compilação:
+
+    \begin{lstlisting}[mathescape=false]
+    scalac Teste.scala
+    Teste.scala:3: error: reassignment to val
+      resultado = resultado + 1
+                ^
+      one error found
+    \end{lstlisting}
+
+    Segundo \citeonline{progScala2}, a imutabilidade tem enormes benefícios para a concorrência. Quase toda a dificuldade de programação concorrente está em sincronizar o acesso a dados compartilhados, também conhecido como estado mutável. Se remover a mutabilidade de um programa concorrente, então os problemas com estado mutável não irão existir. É a combinação de funções referencialmente transparentes e valores imutáveis ​​que compõem a programação funcional como uma melhor forma de escrever software concorrente.
+
+    \subsection{Recursão}
+
+    Recursão desempenha um papel mais importante na programação funcional pura do que na programação imperativa, em parte por causa da restrição de que as variáveis precisam ser imutáveis​​. Uma forma de implementar $loop$ de uma forma puramente funcional é com recursividade.
+
+    A seguir um exemplo de como criar uma função para calcular o valor de $x$ elevado à $y$ para demonstrar o uso de recursividade em Scala.
+
+    \begin{lstlisting}[language=Scala, mathescape=false]
+    def exponencial(x: Int, y: Int): Int = if (y == 0) 1 else x * exponencial(x, (y - 1))
+
+    val resultado = exponencial(2, 3)
+    println(resultado) //imprime 8
+    \end{lstlisting}
+
+  \section{Java}
+
+  Embora Java não seja a única linguagem de programação disponível para a plataforma Java, ela é a linguagem de programação padrão. A linguagem Java foi criada na década de 90 na empresa Sun Microsystem por um equipe de programadores liderada por James Gosling. Java é uma linguagem de programação orientada a objetos, e isso significa que o foco da linguagem é sobre os dados que representam estados do objeto e dos métodos que servem para manipular os dados e alterar o estados dos objetos.
+
+    \subsection{Orientada a Objetos}
+
+    O Paradigma de orientação a objetos permite que o programador foque o desenvolvimento no dado, ou no objeto. Java não é uma linguagem puramente orientada a objetos como Smaltalk, onde qualquer elemento é um objeto. Em Java há os tipos primitivos de dados que não são objetos, mas foram criados e incorporados ao Java para permitir uma melhor forma de utilização da linguagem pelos programadores. Outra característica importante da linguagem Java em relação à linguagem C++, é que Java não suporta herança múltipla.\cite{aprendaJava}.
+
+    \subsection{Compilada e Interpretada}
+
+    Um programa desenvolvido em Java necessita ser compilado, gerando um bytecode. Para executá-lo é necessário então, que um interpretador leia o código binário, o bytecode e repasse as instruções ao processador da máquina específica. Esse interpretador é conhecido como JVM (Java Virtual Machine). Os bytecodes são conjuntos de instruções, parecidas com código de máquina. É um formato próprio do Java para a representação das instruções no código compilado.\cite{aprendaJava}.
+
+    \subsection{Herança}
+
+    Ao programar classes em Java, muitas vezes diferentes classes tem características comuns entre elas, por este motivo, ao invés de se criar um nova classes com todas essas características, usa-se as características de uma classe já existente através da herança.
+
+    A linguagem de programação Java suporta apenas herança simples, que significa que uma classe pode possuir apenas uma superclasse diretamente. A palavra-chave $extends$ é utilizada para indicar que uma classe herda de outra classe.
+
+    Como exemplo, dada uma classe chamada $Veiculo$ que possui um método $buzinar()$ e duas classes $Carro$ e $Moto$. As classes $Carro$ e $Moto$ herdam o método $buzinar()$ da classe $Veiculo$, e automaticamente se tornar subclasses da superclasse $Veiculo$.
+
+    \begin{lstlisting}[language=Java, mathescape=false]
+    public class Veiculo {
+      public String buzinar() {
+        return "BiBiBi";
+      }
+    }
+
+    public class Carro extends Veiculo { }
+
+    public class Moto extends Veiculo { }
+    \end{lstlisting}
+
+    \subsection{Encapsulamento}
+
+    Encapsulamento é utilizado para não expor detalhes internos do objeto, tornando o objeto mais independente. Em outras palavras, utilizando o encapsulamento é possível separar os aspectos externos de um objeto e torná-los acessíveis para outros objetos, enquanto os detalhes internos desse objeto permanecem ocultos para os outros objetos.
+
+    Uma grande vantagem de uso do encapsulamento é permitir que a implementação de um objeto possa sofrer modificações sem que os outros objetos ou aplicações que fazem uso desse objeto sejam afetados. Isso ajuda na manutenção dos programas, pois uma mudança em um objeto não afeta outros objetos de uma aplicação.
+
+    O uso do encapsulamento também evita que dados específicos de uma classe possam ser acessados ou usados diretamente. Em Java esse controle é feito por modificadores de acesso que restringem ou não o acesso à métodos e atributos de uma classe.
+
+    Como exemplo, temos a classe $Pessoa$ que possui um atributo marcado como privado através da palavra chave $private$ e com esse modificador significa que nenhum outro objeto tem acesso à ele). Os métodos $getNome$ e $setNome$ utilizar o modificador de acesso $public$, que significa que esses métodos são públicos, ou seja, qualquer objetos pode invocar estes métodos.
+
+    \begin{lstlisting}[language=Java, mathescape=false]
+    public class Pessoa {
+      private String nome;
+
+      public void setNome(String nome) {
+        this.nome = nome;
+      }
+
+      public String getNome() {
+        return nome;
+      }
+    }
+    \end{lstlisting}
+
+    \subsection{Polimorfismo}
+
+    Polimorfismo é o princípio pelo qual duas ou mais classes derivadas de uma mesma superclasse podem invocar métodos que têm a mesma identificação ou assinatura mas possuem comportamentos distintos, especializados para cada classe derivada, usando para tanto uma referência a um objeto do tipo da superclasse. A decisão sobre qual o método que deve ser selecionado, de acordo com o tipo da classe derivada, é tomada em tempo de execução, através do mecanismo de ligação tardia.\cite{JavaPolimorf}
+
+    O Polimorfismo pode ocorrer de forma estática ou dinâmica. Polimorfismo estático ocorre quando existe um mesmo método implementado várias vezes na mesma classe. A escolha de qual método será invocado depende da assinatura dos métodos sobrecarregados. O Polimorfismo dinâmico acontece na herança, quando a subclasse sobrepõe o método original. Agora o método escolhido se dá em tempo de execução e não mais em tempo de compilação. A escolha de qual método será chamado depende do tipo do objeto que recebe a mensagem.
+
+    No exemplo a seguir, foi definido uma interface chamada $Animal$ com um método chamado $fazerBarulho()$ que representa qualquer tipo de animal que possa emitir algum tipo de som. As classes $Cachorro$ e $Gato$ são classes derivadas dessa interface e cada classe possui sua própria implementação do método $fazerBarulho$ conforme cada tipo de animal.
+
+    \begin{lstlisting}[language=Java, mathescape=false]
+    public interface Animal {
+      abstract String fazerBarulho();
+    }
+
+    public class Cachorro implements Animal {
+      public String fazerBarulho() {
+        return "Au au Au";
+      }
+    }
+
+    public class Gato implements Animal {
+      public String fazerBarulho() {
+        return "Miau Miau";
+      }
+    }
+
+    Animal animal = new Cachorro();
+    animal.fazerBarulho(); //retorna "Au au Au"
+    \end{lstlisting}

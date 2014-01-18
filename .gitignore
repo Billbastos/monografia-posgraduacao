@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.toc
+*.gz
+*.blg
+*.loq
+*.lot
+*.toc
+*.bbl
+*.lof
+*.fdb_latexmk
+*.DS_Store
+*.sublime-workspace
+*.sublime-project
+*.numbers

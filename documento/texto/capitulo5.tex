@@ -1,0 +1,234 @@
+\chapter{Experimentos Propostos}
+
+\vspace{-1.9cm}
+
+Neste capítulo, são apresentados os programas utilizados no experimento, sendo estes escritos nas linguagens de programação Java, Clojure e Scala seguindo esta mesma sequência. Todos os programas serão seguidos de uma breve explicação e comentário. Todos os programas geram o tempo de execução em milissegundos.
+
+\section{Somar Números Inteiros}
+
+  Este primeiro programa tem por finalidade somar os primeiros 1000000 números inteiros.
+
+  \subsection{Java}
+
+     Implementação em Java:
+
+    \begin{lstlisting}[language=Java, mathescape=false]
+    public class SomarNumeros {
+
+      public static void main(String[] args) {
+        double tempoInicial = System.nanoTime();
+
+        long somatoria = 0;
+        for (long i = 1; i < 1000000; i++) {
+          somatoria += i;
+        }
+
+        double tempoFinal = System.nanoTime();
+
+        System.out.println("Resultado: " + somatoria);
+        System.out.println("Tempo (ms): " + ((tempoFinal - tempoInicial) / 1000000));
+      }
+
+    }
+    \end{lstlisting}
+
+  \subsection{Clojure}
+
+    Implementação em Clojure:
+
+    \begin{lstlisting}[language=Clojure, mathescape=false]
+    (ns somarnumeros.core
+      (:gen-class))
+
+    (defn -main
+      [args]
+
+      (def tempoInicial (double (. System (nanoTime))))
+
+      (def resultado (loop [somar (long 0) inicio (long 1)]
+        (if (< inicio 1000000) (recur (+ somar inicio) (inc inicio)) somar)))
+
+      (def tempoFinal (double (. System (nanoTime))))
+
+      (println (format "Resultado: %d" resultado))
+      (println (format "Tempo (ms): %.6f" (/ (- tempoFinal tempoInicial) 1000000))))
+    \end{lstlisting}
+
+  \subsection{Scala}
+
+    Implementação em Scala:
+
+    \begin{lstlisting}[language=Scala, mathescape=false]
+    object SomarNumeros extends App {
+
+      val tempoInicial: Double = System.nanoTime
+
+      def somar(inicio: Long, total: Long, resultado: Long = 0): Long =
+        if (inicio >= total) resultado else somar(inicio + 1, total, inicio + resultado)
+
+      val resultado = somar(1, 1000000)
+      val tempoFinal: Double = System.nanoTime
+
+      println(s"Resultado: $resultado")
+      println(s"Tempo (ms): ${((tempoFinal - tempoInicial) / 1000000)}")
+
+    }
+    \end{lstlisting}
+
+
+\section{Manipulação de Listas}
+
+  Este programa tem por finalidade gerar um lista com números inteiros de 1 a 1000000, em seguida o programa deve filtrar todos os números pares dessa lista.
+
+  \subsection{Java}
+
+    Implementação em Java:
+
+    \begin{lstlisting}[language=Java, mathescape=false]
+    import java.util.ArrayList;
+    import java.util.List;
+
+    public class FiltrarNumerosPares {
+
+      public static void main(String[] args) {
+        double tempoInicial = System.nanoTime();
+
+        List<Long> resultado = new ArrayList<Long>();
+
+        for (long numero = 1; numero <= 1000000; numero++) {
+          if (numero % 2 == 0) {
+            resultado.add(numero);
+          }
+        }
+
+        double tempoFinal = System.nanoTime();
+
+        System.out.println("Resultado: " + resultado.size());
+        System.out.println("Tempo (ms): " + ((tempoFinal - tempoInicial) / 1000000));
+      }
+
+    }
+    \end{lstlisting}
+
+  \subsection{Clojure}
+
+    Implementação em Clojure:
+
+    \begin{lstlisting}[language=Clojure, mathescape=false]
+    (ns manipulacaodelistas.core
+      (:gen-class))
+
+    (defn -main
+      [args]
+
+      (def tempoInicial (double (. System (nanoTime))))
+
+      (def numeros (range 1 1000001))
+      (def resultado (filter #(= 0 (rem % 2)) numeros))
+
+      (def tempoFinal (double (. System (nanoTime))))
+
+      (println (format "Resultado: %d" (.size resultado)))
+      (println (format "Tempo (ms): %.6f" (/ (- tempoFinal tempoInicial) 1000000))))
+    \end{lstlisting}
+
+  \subsection{Scala}
+
+    Implementação em Scala:
+
+    \begin{lstlisting}[language=Scala, mathescape=false]
+    object FiltrarNumerosPares extends App {
+
+      val tempoInicial: Double = System.nanoTime
+
+      val numeros = 1 to 1000000
+      val resultado = numeros.view.filter(_ % 2 == 0)
+
+      val tempoFinal: Double = System.nanoTime
+
+      println(s"Resultado: ${resultado.size}")
+      println(s"Tempo (ms): ${((tempoFinal - tempoInicial) / 1000000)}")
+
+    }
+    \end{lstlisting}
+
+\section{Cálculo Fatorial}
+
+  Este programa tem por finalidade calcular o fatorial do número 50.
+
+  \subsection{Java}
+
+    Implementação em Java:
+
+    \begin{lstlisting}[language=Java, mathescape=false]
+    public class CalcularFactorial {
+
+      public BigInteger factorial(BigInteger f, BigInteger n) {
+        if (n.compareTo(new BigInteger("1")) == 0)
+          return f;
+        else
+          return factorial(f.multiply(n), n.subtract(new BigInteger("1")));
+      }
+
+      public static void main(String[] args) {
+        double tempoInicial = System.nanoTime();
+
+        CalcularFactorial c = new CalcularFactorial();
+        BigInteger resultado = c.factorial(new BigInteger("1"),  new BigInteger("50"));
+
+        double tempoFinal = System.nanoTime();
+
+        System.out.println("Resultado: " + resultado);
+        System.out.println("Tempo (ms): " + ((tempoFinal - tempoInicial) / 1000000));
+      }
+
+    }
+    \end{lstlisting}
+
+  \subsection{Clojure}
+
+    Implementação em Clojure:
+
+    \begin{lstlisting}[language=Clojure, mathescape=false]
+    (ns calculofatorial.core
+      (:gen-class))
+
+    (defn -main
+      [args]
+
+      (def tempoInicial (double (. System (nanoTime))))
+
+      (defn factorial [f n]
+        (if (= n 1)
+          f
+          (factorial (* f n) (dec n))))
+
+      (def resultado (factorial 1N 50N))
+
+      (def tempoFinal (double (. System (nanoTime))))
+
+      (println (format "Resultado: %d" (biginteger resultado)))
+      (println (format "Tempo (ms): %.6f" (/ (- tempoFinal tempoInicial) 1000000))))
+    \end{lstlisting}
+
+  \subsection{Scala}
+
+    Implementação em Scala:
+
+    \begin{lstlisting}[language=Scala, mathescape=false]
+    object CalcularFactorial extends App {
+
+      val tempoInicial: Double = System.nanoTime
+
+      def factorial(f: BigInt, n: BigInt): BigInt = {
+        if (n == 1) f else factorial((f * n), (n - 1))
+      }
+
+      val resultado = factorial(1, 50)
+      val tempoFinal: Double = System.nanoTime
+
+      println(s"Resultado: $resultado")
+      println(s"Tempo (ms): ${((tempoFinal - tempoInicial) / 1000000)}")
+
+    }
+    \end{lstlisting}

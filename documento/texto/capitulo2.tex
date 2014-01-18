@@ -1,0 +1,76 @@
+\chapter{Paradigmas de Programação}
+
+\vspace{-1.9cm}
+
+``Paradigma é um termo com origem no grego \"paradeigma\" que significa modelo, padrão. No sentido lato corresponde a algo que vai servir de modelo ou exemplo a ser seguido em determinada situação. São as normas orientadoras de um grupo que estabelecem limites e que determinam como um indivíduo deve agir dentro desses limites.'' \cite{Significados:2013}.
+
+Paradigma de programação pode ser definido como um uma idéia que o desenvolvedor possui ao estruturar e escrever um programa. Metodologias diferentes são propostas através de diferentes linguagens de programação, sendo que estas apresentam diferentes paradigmas. Um paradigma de programação está relacionado à maneira de pensar do desenvolvedor e na forma em que ele escreve uma solução para os problemas. É através do paradigma que permite-se ou proíbe-se o uso de determinadas técnicas de programação.
+
+Paradigmas de programação são classificados com base em seus conceitos que podem ser: estruturado, funcional, imperativo, lógico e orientado a objetos. Cada paradigma define uma forma particular de tratar problemas e de definir possíveis soluções. Fora isso, uma linguagem de programação pode fazer uso de mais de um paradigma para melhorar as análises e soluções.
+
+\section{Programação Funcional}
+
+  Segundo Fogus ``Programação funcional é o uso de funções que transformam valores em unidades de abstração, subsequentemente usadas para construir sistemas de software.''(FOGUS, 2013, tradução nossa).\nocite{FuncJS:2013}\footnote{Functional programming is the use of functions that transform values into units of abstraction, subsequently used to build software systems.}
+
+  O Paradigma de programação funcional basicamente cria algoritmos escritos em linguagem definida por expressões, declarações e funções, considerando a computação como uma avaliação de funções matemáticas. Com o uso da \ac{FP} existe também a possibilidade de escrever algoritmos onde podemos determinar o que se pretende criar e não como será criado. O paradigma funcional não utiliza o conceito de atribuição pelo fato de que os programas são formados por definições de funções. Uma de suas características determinantes é a aplicação de funções à dados imutáveis e sem estados.
+
+  Existem inúmeras características que cada linguagem funcional utiliza, mas geralmente as linguagens de programação funcionais tem as seguintes características:
+
+  \begin{compactitem}
+    \item Funções de ordem superior;
+    \item Transparência referencial;
+    \item Recursão;
+    \item Imutabilidade;
+  \end{compactitem}
+
+  Na área da matemática e da ciência da computação, funções de ordem superior são funções que podem receber funções como argumentos, assim como produzir funções como resultado de sua computação. Por ser um modelo simples, o cálculo lambda permite demonstrar alguns conceitos importantes de linguagens de programação, como por exemplo ligação, escopo, ordem de avaliação, computabilidade, sistemas de tipos e etc.\cite{fpjava}.
+
+  Na matemática, funções nunca possuem efeitos colaterais. Por exemplo, não importa o que aconteça internamente em um método chamado $cos(x)$ que calcule o co-seno de $x$, o resultado será sempre o mesmo para um dado valor de $x$, sem nenhuma mudança no estado externo do programa que invocou este método. Por exemplo, dado a função $y = f x$ e a função $g = h y y$, é possível substituir a definição de $g$ pela função $g = h (f x) (f x)$ e obter o mesmo resultado. Estar apto a substituir a chamada de uma função por um conjunto de parâmetros com o valor esperado é chamada de transparência referencial e torna possível conduzir o raciocínio equacional no código.\cite{Haskell:2013}.
+
+  Recursão é um recurso amplamente utilizado na programação funcional como a principal forma de iteração. Linguagens de programação funcionais frequentemente irão oferecer otimizações para garantir que a execuções de recursões grandes não consumam muita memória sem necessidade.\cite{Haskell:2013}.
+
+  Programas funcionais puros tipicamente operam através de dados imutáveis, dados que não possuem mudança de valor. Ao invés de alterar valores existentes dos dados, são criadas cópias alteradas e os valores originais são mantidos. Desde que a estrutura desses dados não possam ser modificadas, eles podem frequentemente ser compartilhados entre cópias novas e velhas armazenadas em memória.
+
+  \subsection{Cálculo Lambda}
+    O calculo lambda também conhecido pelo símbolo $\lambda$, foi inventado por Alonzo Chruch em 1930 e publicado em 1941 em resposta ao problema de decisão de David Hilbert (Hilbert's Entscheidungsproblem) proposto no ano de 1928. O problema de decisão inspirou outro modelo computacional conhecido como máquina de Turing.\cite{WhatsLC:2013}
+
+    O calculo lambda é um dos pilares da ciência da computação e pode ser considerado a primeira linguagem de programação funcional, embora nunca tenha sido projetada para ser realmente executada em um computador. Ele talvez seja o mais famoso, por servir como base para a linguagem de programação LISP, inventada por John McCarthy em 1958.\cite{WhatsLC:2013}
+
+    O cálculo lambda é um modelo matemático, e pode ser pensado como uma linguagem de programação pura, baseada na definição e aplicação de funções, e o seu método de iteração é através da recursão. Esse modelo permite a representação de qualquer algoritmo, e é pura no sentido de que as funções recebem e retornam dados, que podem ser inclusive funções, e não podem ser alterados pela função.\nocite{FormalLC:2013}
+
+    Funções em cálculo lambda são muito diferentes de funções em linguagens de programação imperativas como Java e C. Em uma linguagem de programação imperativa a avaliação de uma função pode ter efeitos colaterais, afetando avaliações futuras de uma função para outras funções. No cálculo lambda uma função não pode retornar um resultado baseado em seus parâmetros, as invés disso seus parâmetros são reduzidos para chegar em um resultado que matematicamente é equivalente a questão.\cite{IntroLambda:1989}.
+
+    O conceito central em cálculo lambda são as expressões ou termos, sendo que existem três tipos de expressões:
+
+    \begin{compactitem}
+      \item Variável: x;
+      \item Abstração ou Função: $\lambda$x.e;
+      \item Aplicação: x y;
+    \end{compactitem}
+
+    Variáveis são expressas por meio de identificadores alfanuméricos, com por exemplo a letra $x$. Abstrações representam a função que retorna o valor $e$ quando recebe o parâmetro formal $x$, sendo que o $.$ na expressão separa o argumento da função de seu corpo. Aplicações representam a aplicação da expressão $x$ para $y$.
+
+\section{Programação Orientada a Objetos}
+
+  Paradigma de orientação a objetos é um conceito que foi criado devido a necessidade de ultrapassar os problemas que foram encontrados com o uso de técnicas como a programação estruturada. Enquanto a programação estruturada tem colocado ênfase na lógica e ações, a programação orientada a objetos tomou uma direção completamente diferente colocando ênfase em objetos e informações. Com a programação orientada a objetos, um problema vai ser dividido em várias unidades que são chamados de objetos.
+
+  Existem vantagens ao utilizar a programação orientada a objetos como a manutenção simplificada, uma análise avançada de programas complexos e reutilização de código. Existe uma série de linguagens de programação que usam \ac{OOP}, como o Java, C++ e Smalltalk. Um conceito importante na \ac{OOP} é a modelagem de dados, pois antes de construir um sistema orientado a objetos, é necessário encontrar os objetos dentro do sistema e determinar as relações entre eles.
+
+  Uma classe é uma unidade que armazena dados e funções que irão realizar operações sobre os dados. Um objeto é uma instância de classe e ele pode receber e enviar mensagens para outros objetos. Os objetos que existem dentro de programas são muitas vezes baseados em objetos do mundo real, e que irão se comportar da mesma maneira.
+
+  Existem duas coisas que são encontradas em todos os objetos que existem no mundo real, essas duas coisas são comportamentos e estados. Enquanto comportamentos e estados são encontrados em objetos do mundo real, eles também podem ser codificados para objetos no programa.
+
+  As principais características das linguagens de programação orientadas a objetos são:
+
+  \begin{compactitem}
+    \item Herança;
+    \item Encapsulamento;
+    \item Polimorfismo;
+  \end{compactitem}
+
+  Herança é um aspecto da \ac{OOP} que permite que subclasses possam herdar os traços e as características de sua superclasse. A subclasse herdará todos os membros, exceto aqueles que foram definidos como sendo privado. Uma subclasse pode usar o comportamento dos membros que herdou da superclasse e que também pode adicionar novos membros e comportamentos. Existem duas grandes vantagens no uso de herança que são a implementação de dados abstratos e reutilização de comportamentos.
+
+  Encapsulamento é responsável por proteger os dados dentro de uma classe de objetos externos. Ele só irá revelar a informação funcional. No entanto, a implementação será ocultada. O encapsulamento é um conceito que promove a modularidade e é também crucial para esconder informações que não precisam ser expostas para outros objetos.
+
+  Polimorfismo é a capacidade de diferentes objetos para responder à mesma mensagem de diferentes maneiras. Ele permite que um único nome ou o operador a ser associada com diferentes operações, dependendo do tipo de dados que tenha passado, e dá a possibilidade de redefinição de um método dentro de uma classe de derivados.
+  \cite{esPratica:2010}

@@ -1,0 +1,74 @@
+\chapter{Plataforma Java}
+
+\vspace{-1.9cm}
+
+  \section{História do Java}
+
+  Com o Java, a Sun Microsystems criou a primeira linguagem de programação que não estava vinculada a nenhum sistema operacional específico ou microprocessador. As aplicações escritas em Java podiam ser executadas em qualquer lugar, eliminando um dos maiores problemas para os usuários de computador, a incompatibilidade entre sistemas operacionais e versões de sistemas operacionais.
+
+  O Java foi desenvolvido a partir de um desejo de construir software para produtos eletrônicos de consumo como aparelhos eletrônicos e eletrodomésticos. Tudo começou em 1991, quando uma equipe de pesquisadores da Sun desenvolveu alguns conceitos dando uma nova direção para alta tecnologia, os consumidores que necessitavam de computadores estavam por toda a parte e foram a força motriz por trás de muitos dos produtos voltados para a casa como o videocassete, o forno de micro-ondas e o sistema de som. No entanto, cada produto necessitava da sua própria interface. Em outras palavras, para controlar três dispositivos, os consumidores tiveram que ter três controles remotos e compreender o manuseio para os três dispositivos. Além do fato de que a Sun estava ficando para trás de seus concorrentes, este foi um forte motivador para a Sun lançar um novo projeto, que mais tarde se tornaria o Java.\cite{JavaTimeline:2013}.
+
+  Uma equipe chamada Green Team foi formada para trabalhar na criação de um dispositivo simples que controlava uma variedade de produtos eletrônicos de uso para o dia-a-dia. A equipe foi composta por dois programadores, Patrick Naughton e James Gosling, e o engenheiro Mike Sheridan. Gosling percebeu que o que eles precisavam era de uma nova linguagem de programação.\cite{JavaHistory:2013}.
+
+  Até o momento, as linguagens de programação existentes como o C++ tinha sua ênfase na velocidade, e não na confiabilidade. No setor de eletroeletrônicos, a confiabilidade é mais importante que a velocidade. Com este propósito Gosling e Naughton conseguiram realizar o trabalho em conjunto e criar uma nova linguagem que eles chamaram de Oak e isso aconteceu em agosto de 1991. Um ano depois, o Green Team desenvolveu um dispositivo portátil, sem teclado, sem botões e com uma tela minúscula. Bastava um toque para ativá-lo e controlar a ação na tela com a ponta do dedo, e com esse dispositivo tornou-se possível programar o gravador de videocassete apenas movendo o dedo ao longo da tela. Ainda assim, esta tecnologia não emplacou devido a vários motivos como a fabricação dos chips que eram muito caros.\cite{CoreJava:2010}.
+
+  O nome Oak teve de ser alterado devido ao fato de que era muito próximo ao de uma linguagem de programação já existente, consequentemente Oak foi rebatizado como Java. Em 1994, a maioria das pessoas utilizam o Mosaic, um navegador Web não-comercial e em meados de 1994 os desenvolvedores da Sun viram uma oportunidade para a linguagem Java com o surgimento da World Wide Web. Sua idéia era liberar o Java de graça na Internet liberando também o seu próprio navegador para uso não comercial, para que assim eles se tornassem um padrão.\cite{CoreJava:2010}.
+
+\section{Máquina Virtual Java}
+
+  A máquina virtual Java, conhecida também pela sigla \ac{JVM} que é um acrônimo para Java Virtual Machine, é o principal componente da plataforma Java. Ela é a tecnologia responsável por tornar programas escritos em Java independentes de sistemas operacionais e de hardware. A \ac{JVM} é chamada de "virtual", pois fornece uma interface que não depende de sistema operacional subjacente ou da arquitetura de hardware da máquina. Esta independência de hardware e de sistema operacional é a base do termo "Write Once, Run Anywhere" que traduzido significa "escreve uma vez, execute em qualquer lugar"\cite{jvm:2013}. Existem versões da \ac{JVM} para diversas arquiteturas e sistemas operacionais.
+
+  A maioria das linguagens de programação compilam o código fonte diretamente para código de máquina, que é projetado para ser executado em uma arquitetura de microprocessador específico ou sistema operacional, como o Windows ou Unix. No caso da \ac{JVM}, ela permite que o bytecode Java possa ser executado como ações ou chamadas de sistema operacional em qualquer processador, independentemente do sistema operacional. Portanto, a \ac{JVM} não tem conhecimento sobre a linguagem Java, porque ela entende somente o bytecode. Desta forma, qualquer linguagem que possar ser compilada e ser capaz gerar bytecode Java poderá ser executada na \ac{JVM}.
+
+  Algumas das características mais importantes da \ac{JVM} são:
+
+  \begin{compactitem}
+    \item Baseia-se numa pilha de avaliação, o qual pode ser manipulada pelos bytecodes Java. Os argumentos do método são enviados para a pilha antes da invocação de um método, e quando completado o valor de retorno está localizado na pilha.
+    \item É fortemente tipada.
+    \item Manipulação de ponteiro não é permitido.
+    \item Possui coleta automática de lixo, onde os objetos não referenciados são automaticamente liberados da memória.
+  \end{compactitem}
+
+  \section{Bytecode Java}
+
+  Arquivos $.class$ são o resultado da compilação de programas escritos com a linguagem Java. Os arquivos $.class$ contém bytecode Java, sendo que bytecode Java são instruções que a máquina virtual Java consegue executar, cada instrução ou bytecode a ser executado é um código de operação (\ac{opcode}) com o tamanho de um byte, seguido por zero ou mais operandos fornecendo argumentos ou dados que são usados na operação. Atualmente existem 256 opcodes possíveis, embora nem todos estejam sendo utilizados e mais 51 opcodes estão reservados para uso futuro.\cite{jvm:2013}. Muitas instruções não tem operandos e consiste apenas de um único \ac{opcode}.
+
+  Segundo \citeonline{jvm:2013}, essas instruções são agrupadas da seguinte forma:
+
+  \begin{compactitem}
+    \item Operações para checagem de tipos;
+    \item Operações de carga e armazenamento;
+    \item Operações aritméticas;
+    \item Operações para conversão de tipos;
+    \item Operações para criação e manipulação de objetos;
+    \item Operações para gerenciamento de pilha;
+    \item Operações para controle de fluxo;
+    \item Operações para invocação de método;
+    \item Operações lançamento de exceções;
+    \item Operações para sincronização;
+  \end{compactitem}
+
+  Um programador Java não precisa entender os bytecodes Java para ser proficiente na linguagem, da mesma forma que um programador de qualquer linguagem de alto nível compilada para linguagem de máquina não precisa conhecer a linguagem de montagem do computador hospedeiro para escrever bons programas naquela linguagem.
+
+  \section{Coletor de Lixo}
+
+  A máquina virtual Java possui coleta de lixo automática, ou seja, caso não exista mais nenhuma referência a um objeto que tenha sido criado, o coletor de lixo destrói o objeto e libera a memória ocupada por ele. Quando a JVM percebe que o sistema diminuiu a utilização do processador, a JVM faz com que o coletor de lixo execute, vasculhando a memória em busca de algum objeto criado e não mais referenciado.
+
+  Diferente de outras linguagens de programação, em Java não é possível liberar explicitamente a memória de objetos. Embora a máquina virtual fornece dois métodos que podem (não exista garantia que isso irá ocorrer) executar de forma instantânea o coleta de lixo. Os métodos para isso são $Runtime.gc()$ e $System.gc()$.
+
+  O coletor de lixo do Java é uma grande vantagem para desalocação de memória, que é um grande inconveniente para programadores que trabalham com ponteiros e necessitam liberar o espaço alocado, visto que é o próprio sistema que se encarrega desta limpeza, evitando erros de desalocação de objetos ainda em uso.
+
+  \section{Interoperabilidade Entre Linguagens na JVM}
+
+  Interoperabilidade é a capacidade que componentes dentro de uma infraestrutura de \ac{TI} tem de conversar entre si. Assim, com interoperabilidade garante-se que aplicações possam conversar de forma a trocar e processar dados geridos por outras aplicações. Seguir um padrão de intercâmbio de informações é fundamental para que se consiga atingir interoperabilidade. O uso de padrões abertos e públicos permite que diversos fabricantes possam fornecer formas de acesso para outras aplicações usando protocolos e formatos de arquivos padronizados.
+
+  Interoperabilidade entre linguagens é a capacidade de duas linguagens de programação diferentes interagirem nativamente e operarem a mesma estrutura de dados. Na plataforma Java, existem compiladores para outras linguagens de programação que geram bytecode Java e por isso podem ser executados na máquina virtual Java. Algumas das diversas linguagens de programação que geram bytecode são:
+
+  \begin{compactitem}
+    \item Clojure - um dialeto \ac{Lisp};
+    \item Groovy - uma linguagem de script;
+    \item JRuby - uma implementação da linguagem Ruby;
+    \item Jython - uma implementação da linguagem Python;
+    \item Rhino - uma implementação da linguagem Javascript;
+    \item Scala - uma linguagem híbrida que utiliza os conceitos de programação orientada a objetos e programação funcional;
+  \end{compactitem}
